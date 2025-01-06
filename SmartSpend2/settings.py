@@ -16,21 +16,7 @@ from os import path
 from django.contrib import messages
 import environ
 
-os.environ["AI21_API_KEY"] = "AdWkhSmvVEMbaTSc7MqfMG5rBveZPSoN"
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-5_idlg3@92n(#0=n&eaxzhq-fa&e9tlxd##%h4d*fl!1esa6^8'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -39,17 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'transactions',
-    'authentication',
-    # 'userpreferences',
-    'budget',
-    'investAI',
-    'wallet',
-    'userProfile',
-]
+   
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -123,42 +99,3 @@ USE_I18N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
-
-STATIC_URL = 'static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR,'SmartSpend2/static')]
-STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
-
-# Initialise environment variables
-env = environ.Env()
-environ.Env.read_env()
-
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-MESSAGE_TAGS = {
-    messages.ERROR: 'danger'
-}
-
-#email data
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = os.environ.get('EMAIL_HOST')
-# EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-# EMAIL_USE_TLS = True
-# DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
-# EMAIL_PORT = 587
-# EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.gmail.com"  # Ensure this is correct
-EMAIL_PORT = 587  # Or 465 for SSL
-EMAIL_USE_TLS = True  # Or EMAIL_USE_SSL = True for port 465
-EMAIL_HOST_USER = "khushimahajan266@gmail.com"
-EMAIL_HOST_PASSWORD = "ydkx cnpv qnju xbiw"
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
