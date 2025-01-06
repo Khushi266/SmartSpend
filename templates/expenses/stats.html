@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+ {% block content %}
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<div class="container mt-4">
+<div class="row">
+    <div class="col-md-10">
+        <nav aria-label="breadcrumb">
+        <ol class="breadcrumb" style="
+                                        background-color: #dddddd;
+                                        padding-left:1%;
+                                        margin-top:1%; 
+                                        padding-top:0.5%;
+                                        padding: .75rem 1rem;">
+          <li class="breadcrumb-item"><a href="" style="text-decoration:none;">Saved Reports</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Current Month</li>
+        </ol>
+      </nav>
+    </div>
+      <div class="col-md-2" style="margin-top:0.9%;">
+        <a href="{% url 'export_csv' %}" class="btn btn-primary" style="
+        height: 70%;
+        width: 90%;
+        padding-top: 6%;"
+        >Download</a>
+      </div>
+    </div>
+
+    <div>
+      <canvas id="myChart"></canvas>
+    </div>
+    
+    <script>
+      const ctx = document.getElementById('myChart');
+    
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+          datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    </script> 
+    
+      
+      
+
+</div>
+</div>
+<script src="{% static 'js/stats.js' %}"></script>
+
+{% endblock  %}

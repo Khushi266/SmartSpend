@@ -1,0 +1,22 @@
+
+
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Add Funds</h2>
+    <form method="POST" >
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="amount">Amount:</label>
+            <input type="number" class="form-control" step="0.01" name="amount" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Funds</button>
+    </form>
+</div>
+
+
+
+{% endblock %}

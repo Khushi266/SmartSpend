@@ -1,0 +1,77 @@
+{% load static %}
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+    <style>
+        /* Style for the wallet dashboard background */
+        body {
+            background-image: url("{% static 'images/wallet_dashboard.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+        }
+
+        /* Popup message style */
+        .popup-message {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+<div class="popup-message">
+    <h3>Funds added successfully!</h3>
+    <p>Your wallet has been credited with the amount.</p>
+    <a href="{% url 'wallet_dashboard' %}" class="btn btn-success">Go to Wallet</a>
+</div>
+
+<!-- Confetti animation -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+<script>
+    var myCanvas = document.createElement('canvas');
+    document.body.appendChild(myCanvas);
+
+    var myConfetti = confetti.create(myCanvas, {
+        resize: true,
+        useWorker: true
+    });
+
+    var end = Date.now() + (7 * 1000);
+    var colors = ['#bb0000', '#ffffff'];
+
+    (function frame() {
+        confetti({
+            particleCount: 2,
+            angle: 60,
+            spread: 55,
+            origin: { x: 0 },
+            colors: colors
+        });
+        confetti({
+            particleCount: 2,
+            angle: 120,
+            spread: 55,
+            origin: { x: 1 },
+            colors: colors
+        });
+
+        if (Date.now() < end) {
+            requestAnimationFrame(frame);
+        }
+    }());
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+{% endblock %}

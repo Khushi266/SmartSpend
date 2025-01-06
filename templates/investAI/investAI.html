@@ -1,0 +1,117 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+
+{% block content %}
+<link rel ="stylesheet" href="{% static 'css/investAI.css' %}">
+<div class="chat-container">
+  <div class="card flex-grow-1">
+    <div class="card-header">Chat</div>
+    <div class="card-body messages-box">
+      
+      <ul class="list-unstyled messages-list">
+        
+        <li class="message received">
+          <div class="message-text">
+            <div class="message-sender">
+              <b>AI Chatbot</b>
+            </div>
+            <div class="message-content">
+              Hi, I am InvestAI, can I know your name?
+            </div>
+          </div>
+        </li>
+      </ul>
+      
+    </div>
+    <br><br>
+    <br><br>
+    <br><br>
+  </div>
+  <form class="message-form" action="{% url 'investAI' %}" method="post">
+    {%csrf_token%}
+    <div class="input-group">
+      <input type="text" class="form-control message-input" name="message" required placeholder="Type your message...">
+      <div class="input-group-append">
+        <button type="submit" class="btn btn-primary btn-send">Send</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+    const messagesList = document.querySelector('.messages-list');
+    const messageForm = document.querySelector('.message-form');
+    const messageInput = document.querySelector('.message-input');
+
+    messageForm.addEventListener('submit',(event)=>{
+        event.preventDefault();
+
+        const message = messageInput.value.trim();
+        if(message.length === 0){
+            return;
+        }
+
+        const messageItem = document.createElement('li');
+        messageItem.classList.add('message','sent');
+        messageItem.innerHTML = `
+        <div class="message-text">
+            <div class="message-sender">
+                <b>You</b>
+            </div>
+            <div class="message-content">
+                ${message}
+            </div>
+        </div>
+        `;
+        messagesList.appendChild(messageItem);
+        messageInput.value='';
+
+        fetch('',{
+            method:'POST',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            body: new URLSearchParams({
+                'csrfmiddlewaretoken' : document.querySelector('[name=csrfmiddlewaretoken]').value,
+                'message' : message
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            const response = data.response;
+
+            let formattedResponse;
+            if (response.includes('<ol>') || response.includes('<ul>'))  {
+              formattedResponse = response;  // Already formatted in list structure
+            } else {
+              formattedResponse = response.replace(/\n/g, '<br>');
+              // Replace **text** with <b>text</b>
+              formattedResponse = formattedResponse.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+
+              // Replace ###text with <h3>text</h3>
+              //formattedResponse = formattedResponse.replace(/###(.*?)\n/g, '<h3>$1</h3>');  // Replace newlines with <br> tags
+            }
+
+            const messageItem = document.createElement('li');
+            messageItem.classList.add('message','received');
+            messageItem.innerHTML = `
+            <div class="message-text">
+                <div class="message-sender">
+                    <b>AI Chatbot</b>
+                </div>
+                <div class="message-content">
+                    ${formattedResponse}
+                </div>
+            </div>
+            `;
+            messagesList.appendChild(messageItem);
+            messagesList.scrollTop = messagesList.scrollHeight;
+        });
+
+    });
+</script>
+
+
+{% endblock %}
