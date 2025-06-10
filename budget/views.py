@@ -331,7 +331,7 @@ def edit_budget(request, budget_id):
 def handle_conversation(prompt):
     # Create completions using AI21Client
     response = client.chat.completions.create(
-        model="jamba-instruct-preview",
+        model="jamba-mini-1.6-2025-03",
         messages=[AI21ChatMessage(   # Single message with a single prompt
             role="user",
             content=prompt
@@ -366,7 +366,13 @@ def prepare_detailed_data(detailed_data):
     <br> for line breaks between sections.
     dont use any css for it.
     income is 5000,savings 2000
-    """
+    """.format(
+        "\n".join(detailed_data.get('Income', [])),
+        "\n".join(detailed_data.get('Expenses', [])),
+        "\n".join(detailed_data.get('Bills', [])),
+        "\n".join(detailed_data.get('Savings', [])),
+        "\n".join(detailed_data.get('Loans', []))
+    )
 
     return prompt
 
