@@ -365,13 +365,8 @@ def prepare_detailed_data(detailed_data):
     <b> to highlight important information.
     <br> for line breaks between sections.
     dont use any css for it.
-    """.format(
-        "\n".join(detailed_data.get('Income', [])),
-        "\n".join(detailed_data.get('Expenses', [])),
-        "\n".join(detailed_data.get('Bills', [])),
-        "\n".join(detailed_data.get('Savings', [])),
-        "\n".join(detailed_data.get('Loans', []))
-    )
+    income is 5000,savings 2000
+    """
 
     return prompt
 
