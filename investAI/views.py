@@ -10,7 +10,7 @@ from django.utils import timezone
 client = AI21Client(api_key=os.getenv("AI21_API_KEY"))
 
 
-def handle_conversation(messages, model="jamba-mini-1.5-2024-08", n=1, max_tokens=1024, temperature=0.7, top_p=1, stop=[]):
+def handle_conversation(messages, model="jamba-mini-1.6-2025-03", n=1, max_tokens=1024, temperature=0.7, top_p=1, stop=[]):
     # Create completions using AI21Client
     response = client.chat.completions.create(
         model=model,
@@ -70,7 +70,7 @@ Ensure the responses are clear, professional, formatted with HTML for optimal pr
         messages.append(AI21ChatMessage(content=user_message,role="user"))
 
         # Get the AI's response
-        ai_response = handle_conversation(messages, model="jamba-instruct-preview", n=1, max_tokens=1024, temperature=0.7, top_p=1, stop=[])
+        ai_response = handle_conversation(messages, model="jamba-mini-1.6-2025-03", n=1, max_tokens=1024, temperature=0.7, top_p=1, stop=[])
         
         # Append the AI's response to the conversation history
         messages.append(AI21ChatMessage(content=initial_message,role="assistant"))
