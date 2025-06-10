@@ -18,7 +18,7 @@ import environ
 import dj_database_url
 from decouple import config
 
-os.environ["AI21_API_KEY"] = "07f02427-cfa9-4ecd-a7d6-67b358e5fe53"
+os.environ["AI21_API_KEY"] = "1ee2470f-33fc-42d3-adb4-de73be216466"
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
