@@ -13,4 +13,4 @@ informed financial decisions. The app features
 easy-to-use tools like automated balance
 adjustments, a digital wallet and much more.
 
-[SmartSpend_Poster.pdf](https://github.com/user-attachments/files/22472415/SmartSpend_Poster.pdf)
+![Image](https://github.com/user-attachments/assets/82e3d722-9b08-435e-9333-abf2092590ce)
